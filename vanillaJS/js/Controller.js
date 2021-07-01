@@ -36,12 +36,15 @@ export default class Controller {
   render() {
     // 검색어 입력시
     if(this.store.searchKeyword.length > 0) {
-      this.tabView.hide()
-      this.searchResultView.show(this.store.searchResult);
-      return
+      return this.renderSearchResult();
     }
 
-    this.tabView.show();
+    this.tabView.show(this.store.selectedTab);
     this.searchResultView.hide();
+  }
+
+  renderSearchResult() {
+    this.tabView.hide()
+    this.searchResultView.show(this.store.searchResult);
   }
 }
