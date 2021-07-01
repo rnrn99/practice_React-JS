@@ -1,13 +1,14 @@
 const tag = "[Controller]";
 
 export default class Controller {
-  constructor(store, { searchFormView }) {
+  constructor(store, { searchFormView, searchResultView }) {
     console.log(tag, 'controller')
     this.store = store;
 
-    this.searchFormView = searchFormView
+    this.searchFormView = searchFormView;
+    this.searchResultView = searchResultView;
 
-    this.subscribeViewEvents()
+    this.subscribeViewEvents();
   }
 
   // 각 view에서 발생하는 이벤트 확인(수신)
@@ -18,10 +19,24 @@ export default class Controller {
   }
 
   search(keyword) {
-    console.log(tag, keyword)
+    console.log(tag, keyword);
+    this.store.search(keyword);
+    this.render();
   }
 
   reset() {
-    console.log(tag, 'reset')
+    console.log(tag, 'reset');
+    this.store.searchKeyword = "";
+    this.store.searchResult = [];
+    this.render();
+  }
+
+  render() {
+    if(this.store.searchKeyword.length > 0) {
+      this.searchResultView.show(this.store.searchResult);
+      return
+    }
+
+    this.searchResultView.hide();
   }
 }
