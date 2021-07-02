@@ -22,7 +22,8 @@ export default class Controller {
     this.searchFormView.on('@submit', (event) => this.search(event.detail.value))
                        .on('@reset', () => this.reset())
     
-    this.tabView.on('@clickTab', (event) => this.clickTab(event.detail.value))
+    this.tabView.on('@clickTab', (event) => this.clickTab(event.detail.value));
+    this.keywordListView.on('@clickKeyword', (event) => this.search(event.detail.value));
   }
 
   search(keyword) {
