@@ -18,6 +18,8 @@ export default class Controller {
     // searchFormView에서 @submit 이벤트(커스텀이벤트) 발생 시(=> 검색어 입력 후 엔터 누름) search함수 호출
     this.searchFormView.on('@submit', (event) => this.search(event.detail.value))
                        .on('@reset', () => this.reset())
+    
+    this.tabView.on('@clickTab', (event) => this.clickTab(event.detail.value))
   }
 
   search(keyword) {
@@ -30,6 +32,12 @@ export default class Controller {
     console.log(tag, 'reset');
     this.store.searchKeyword = "";
     this.store.searchResult = [];
+    this.render();
+  }
+
+  clickTab(tab) {
+    console.log(tag, tab, 'click');
+    this.store.selectedTab = tab;
     this.render();
   }
 
