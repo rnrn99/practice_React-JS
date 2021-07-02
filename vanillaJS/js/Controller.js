@@ -1,13 +1,16 @@
+import { TabType } from "./views/TabView.js";
+
 const tag = "[Controller]";
 
 export default class Controller {
-  constructor(store, { searchFormView, searchResultView, tabView }) {
+  constructor(store, { searchFormView, searchResultView, tabView, keywordListView }) {
     console.log(tag, 'controller')
     this.store = store;
 
     this.searchFormView = searchFormView;
     this.searchResultView = searchResultView;
     this.tabView = tabView;
+    this.keywordListView = keywordListView;
 
     this.subscribeViewEvents();
     this.render();
@@ -36,7 +39,7 @@ export default class Controller {
   }
 
   clickTab(tab) {
-    console.log(tag, tab, 'click');
+    // console.log(tag, tab, 'click');
     this.store.selectedTab = tab;
     this.render();
   }
@@ -47,12 +50,22 @@ export default class Controller {
       return this.renderSearchResult();
     }
 
+    // 기본 화면(초기화면)
     this.tabView.show(this.store.selectedTab);
     this.searchResultView.hide();
+
+    if(this.store.selectedTab === TabType.KEYWORD) {
+      this.keywordListView.show(this.store.getKeywordList());
+    } else if (this.store.selectedTab === TabType.HISTORY) {
+      this.keywordListView.hide();
+    } else {
+      throw console.log("Failed to render KeywordListView");
+    }
   }
 
   renderSearchResult() {
     this.tabView.hide()
+    this.keywordListView.hide();
     this.searchResultView.show(this.store.searchResult);
   }
 }
