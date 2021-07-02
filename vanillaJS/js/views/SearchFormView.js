@@ -51,4 +51,10 @@ export default class SearchFormView extends View {
     handleReset() {
         this.emit("@reset")
     }
+
+    show(keyword) {
+        this.inputElement.value = keyword;
+        this.showResetbtn(this.inputElement.value.length > 0)
+        super.show();
+    }
 }
