@@ -2,9 +2,9 @@ import View from './View.js';
 import { delegate, qs } from '../helpers.js';
 
 export default class KeywordListView extends View {
-    constructor() {
-        super(qs('#keyword-list-view'));
-        this.template = new Template();
+    constructor(element = qs('#keyword-list-view'), template = new Template()) {
+        super(element);
+        this.template = template;
         this.bindEvents();
     }
 
@@ -17,7 +17,7 @@ export default class KeywordListView extends View {
     handleClickList(event) {
         // console.log('click', event.target)
         const value = event.target.dataset.keyword;
-        this.emit('@clickKeyword', { value });
+        this.emit('@click', { value });
     }
 
     show(data = []) {
