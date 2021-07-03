@@ -29,4 +29,8 @@ export default class Store {
   sortHistory(h1, h2) {
     return h2.date > h1.date;
   }
+
+  removeHistory(keyword) {
+    this.storage.historyData = this.storage.historyData.filter(history => history.keyword !== keyword);
+  }
 }
