@@ -31,9 +31,8 @@ class App extends React.Component {
                             onChange={event => this.handleSearchKeyword(event)}
                         />
                         {
-                            this.state.searchKeyword.length > 0 
-                            ? <button type="reset" className="btn-reset"></button>
-                            : null
+                            this.state.searchKeyword.length > 0 && 
+                            (<button type="reset" className="btn-reset"></button>)
                         }
                     </form>
                 </div>
