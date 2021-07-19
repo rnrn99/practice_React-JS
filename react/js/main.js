@@ -9,8 +9,9 @@ class App extends React.Component {
     }
 
     handleSearchKeyword(event){
-        this.state.searchKeyword = event.target.value;
-        this.forceUpdate();
+        this.setState({
+            searchKeyword: event.target.value
+        });
     };
 
     render() {
