@@ -8,11 +8,30 @@ class App extends React.Component {
         };
     }
 
-    handleSearchKeyword(event){
+    handleSearchKeyword(event) {
+        const searchKeyword = event.target.value
+
+        if(searchKeyword.length <= 0) {
+            return this.handleReset();
+        }
+        
         this.setState({
-            searchKeyword: event.target.value
+            searchKeyword
         });
-    };
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        console.log('submit-event', this.state.searchKeyword);
+    }
+
+    handleReset() {
+        this.setState(() => {
+            return {searchKeyword: ''};
+        }, () => {
+            console.log('reset-event', this.state.searchKeyword)
+        });
+    }
 
     render() {
         return (
@@ -22,7 +41,10 @@ class App extends React.Component {
                 </header>
 
                 <div className="container">
-                    <form>
+                    <form 
+                        onSubmit={event => this.handleSubmit(event)}
+                        onReset={() => this.handleReset()}
+                    >
                         <input 
                             type="text" 
                             placeholder="검색어를 입력하세요" 
