@@ -15,6 +15,13 @@ class App extends React.Component {
     };
 
     render() {
+
+        let resetBtn = null;
+
+        if(this.state.searchKeyword.length > 0) {
+            resetBtn = <button type="reset" className="btn-reset"></button>
+        }
+
         return (
             <>
                 <header>
@@ -30,7 +37,7 @@ class App extends React.Component {
                             value={this.state.searchKeyword}
                             onChange={event => this.handleSearchKeyword(event)}
                         />
-                        <button type="reset" className="btn-reset"></button>
+                        {resetBtn}
                     </form>
                 </div>
             </>
