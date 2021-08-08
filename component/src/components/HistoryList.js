@@ -18,8 +18,7 @@ class HistoryList extends Component {
     this.setState({ historyList });
   }
 
-  handleRemove(event, keyword) {
-    event.stopPropagation();
+  handleRemove(keyword) {
     store.removeHistory(keyword);
     this.fetch();
   }
@@ -29,18 +28,8 @@ class HistoryList extends Component {
       <List
         data={this.state.historyList}
         onClick={this.props.onClick}
-        renderItem={(item) => {
-          return (
-            <>
-              <span>{item.keyword}</span>
-              <span className="date">{formatRelativeDate(item.date)}</span>
-              <button
-                className="btn-remove"
-                onClick={(event) => this.handleRemove(event, item.keyword)}
-              ></button>
-            </>
-          );
-        }}
+        hasDate
+        onRemove={(keyword) => this.handleRemove(keyword)}
       />
     );
   }
