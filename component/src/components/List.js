@@ -1,31 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 
-class List extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      data: [],
-    };
-  }
-
-  renderItem(item, index) {
-    throw "renderItem";
-  }
-
-  render() {
-    return (
-      <ul className="list">
-        {this.state.data.map((item, index) => {
-          return (
-            <li key={item.id} onClick={() => this.props.onClick(item.keyword)}>
-              {this.renderItem(item, index)}
-            </li>
-          );
-        })}
-      </ul>
-    );
-  }
+function List({ data = [], onClick, renderItem }) {
+  return (
+    <ul className="list">
+      {data.map((item, index) => {
+        return (
+          <li key={item.id} onClick={() => onClick(item.keyword)}>
+            {renderItem(item, index)}
+          </li>
+        );
+      })}
+    </ul>
+  );
 }
 
 export default List;
